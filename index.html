@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Blackjack — Classic Casino (Login & Game)</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Firebase SDK (v8 compat used in script) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+</head>
+<body>
+  <div class="table-wrap">
+
+    <!-- AUTH SECTION -->
+    <div id="authContainer" class="auth">
+      <h1>🎰 Blackjack Kasino</h1>
+
+      <div class="form-box">
+        <h3>Daftar (Register)</h3>
+        <input type="email" id="regEmail" placeholder="Email" />
+        <input type="password" id="regPassword" placeholder="Password" />
+        <button id="registerBtn">Register</button>
+      </div>
+
+      <div class="form-box">
+        <h3>Login</h3>
+        <input type="email" id="loginEmail" placeholder="Email" />
+        <input type="password" id="loginPassword" placeholder="Password" />
+        <button id="loginBtn">Login</button>
+      </div>
+
+      <p id="authMessage"></p>
+    </div>
+
+    <!-- GAME SECTION -->
+    <div id="gameContainer" style="display:none;">
+      <header>
+        <h1>♠️ Blackjack Kasino ♣️</h1>
+        <div class="status">
+          <div id="userEmailDisplay"></div>
+          <div id="balance">Saldo: 0 💰</div>
+        </div>
+      </header>
+
+      <main class="table">
+        <div class="dealer-area">
+          <div class="label">Dealer</div>
+          <div class="hand" id="dealer-hand"></div>
+          <div class="hand-value" id="dealer-value">Nilai Dealer: ?</div>
+        </div>
+
+        <div class="center-controls">
+          <div class="deck" id="deck">🂠</div>
+
+          <div class="controls">
+            <div class="betbox">
+              <input type="number" id="bet-amount" min="10" max="10000" value="100" />
+              <button id="place-bet">Pasang Taruhan</button>
+            </div>
+
+            <div class="actions">
+              <button id="start-round" disabled>Mulai Ronde</button>
+              <button id="hit-btn" disabled>Hit</button>
+              <button id="stand-btn" disabled>Stand</button>
+            </div>
+
+            <div class="msg" id="message">Pasang taruhan untuk mulai.</div>
+
+            <div style="margin-top:12px;">
+              <button id="topupBtn">💵 Top Up Chip</button>
+              <button id="logoutBtn">🔓 Logout</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="player-area">
+          <div class="label">Player</div>
+          <div class="hand" id="player-hand"></div>
+          <div class="hand-value" id="player-value">Nilai Kamu: 0</div>
+        </div>
+      </main>
+
+      <footer>
+        <small>Taruhan 10 - 10.000 | Blackjack 2.5× | Menang 2× | Seri kembalikan 1×</small>
+      </footer>
+    </div>
+
+    <!-- TOPUP MODAL -->
+    <div id="topupModal" class="modal" style="display:none;">
+      <div class="modal-content">
+        <h2>Pilih Paket Top Up</h2>
+
+        <button class="package" data-amount="10000" data-price="17500">10.000 Chip - Rp17.500</button>
+        <button class="package" data-amount="25000" data-price="40000">25.000 Chip - Rp40.000</button>
+        <button class="package" data-amount="50000" data-price="75000">50.000 Chip - Rp75.000</button>
+        <button class="package" data-amount="100000" data-price="140000">100.000 Chip - Rp140.000</button>
+
+        <hr />
+
+        <div id="paymentInstructions" style="display:none;">
+          <h3>Instruksi Pembayaran (BCA)</h3>
+          <p>Transfer ke rekening:</p>
+          <p><strong>BCA 0882917434</strong><br/>a/n <strong>ANDREAS AGUNG LAKSONO</strong></p>
+          <p>Jumlah transfer: <span id="transferAmount"></span></p>
+
+          <label for="proofImage">Unggah bukti transfer (screenshot):</label>
+          <input type="file" id="proofImage" accept="image/*" />
+
+          <div style="margin-top:8px;">
+            <button id="submitProof">Kirim Bukti Transfer</button>
+            <button id="closeModal">Tutup</button>
+          </div>
+        </div>
+
+        <div id="topup-note" style="margin-top:8px;color:#ffd700">Setelah kirim bukti, admin akan verifikasi (manual).</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
