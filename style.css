@@ -1,0 +1,112 @@
+:root{
+  --card-width:88px;
+  --card-height:120px;
+}
+
+/* basic layout */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: Inter, system-ui, "Segoe UI", Roboto, Arial;
+  background: linear-gradient(180deg,#063e2b 0%, #053624 100%);
+  color:#f8f7f1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:20px;
+}
+
+.table-wrap{
+  width:100%;
+  max-width:1100px;
+  background:linear-gradient(180deg,#0b7410 0%, #085e0f 100%);
+  border:6px solid #0a3b19;
+  border-radius:14px;
+  padding:18px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+.auth { text-align:center; margin-top:10px; }
+.form-box { background: rgba(0,0,0,0.2); padding:12px; margin:10px auto; width:320px; border-radius:8px; border:1px solid #2e8b57; }
+.form-box input { width:80%; padding:8px; margin:6px 0; border-radius:6px; border:0; }
+
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+h1{margin:0;font-size:20px;color:#ffefc3}
+.status{display:flex;gap:18px;font-weight:700}
+
+/* table layout */
+.table{
+  display:grid;
+  grid-template-columns:1fr 360px 1fr;
+  gap:18px;
+  align-items:start;
+  margin-bottom:12px;
+}
+
+.label{font-weight:800;margin-bottom:8px;letter-spacing:0.6px}
+.center-controls{display:flex;flex-direction:column;align-items:center;gap:12px}
+.deck{
+  width:96px;height:128px;border-radius:10px;background:#052b18;display:flex;align-items:center;justify-content:center;font-size:36px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6), inset 0 -6px 12px rgba(0,0,0,0.2);
+  color:#d6d6d6;
+  cursor:default;
+  position:relative;
+}
+
+/* controls */
+.controls{display:flex;flex-direction:column;gap:8px;align-items:center}
+.betbox{display:flex;gap:8px;align-items:center}
+.betbox input{width:140px;padding:8px;border-radius:8px;border:0;font-weight:700}
+button{padding:8px 12px;border-radius:8px;border:0;background:#ffd54a;color:#000;font-weight:700;cursor:pointer}
+button:disabled{opacity:0.45;cursor:not-allowed}
+.msg{background:rgba(0,0,0,0.15);padding:8px;border-radius:8px;min-width:240px;text-align:center}
+
+/* hand (card container) */
+.hand{
+  width:100%;
+  min-height:140px;
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  position:relative;
+}
+
+/* a single card DOM element as img */
+.card{ width:var(--card-width); height:var(--card-height); border-radius:8px; box-shadow:0 8px 18px rgba(0,0,0,0.45);}
+
+/* back of card based on CSS fallback (if needed) */
+.card.back{ background-color: transparent; }
+
+/* hand-value */
+.hand-value{margin-top:10px;font-weight:800}
+
+/* topup modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+.modal .modal-content{
+  background: #004d00;
+  color: white;
+  border: 2px solid gold;
+  border-radius: 12px;
+  width: 360px;
+  margin: 80px auto;
+  padding: 18px;
+  text-align: center;
+}
+.package{ display:block; width:92%; margin:8px auto; padding:8px; border-radius:8px; background:#ffd54a; color:#000; font-weight:700; border:0; cursor:pointer; }
+#paymentInstructions { margin-top: 12px; background: rgba(0,0,0,0.15); padding:10px; border-radius:8px; }
+
+/* responsive */
+@media (max-width:860px){
+  .table{grid-template-columns:1fr;grid-auto-rows:auto}
+  .center-controls{order:0}
+}
